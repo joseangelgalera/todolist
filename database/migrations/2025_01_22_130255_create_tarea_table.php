@@ -35,6 +35,6 @@ return new class extends Migration
     public function down(): void
     {
         // borramos la tabla si existe a la hora de hacer un rollback
-        Schema::dropIfExits('tarea') ;
+        Schema::dropIfExists('tarea');
     }
 };

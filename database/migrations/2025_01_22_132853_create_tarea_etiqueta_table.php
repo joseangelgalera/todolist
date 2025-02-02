@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id('idTE');
             
             $table->foreignId('idTar')->constrained('tarea', 'idTar')
-                  ->onDelete('cascade') ;
-            $table->foreignId('idEti')->constrained('tarea', 'idEti')
-                  ->onDelete('cascade') ;
+                  ->onDelete('cascade');
+            $table->foreignId('idEti')->constrained('etiqueta', 'idEti')
+                  ->onDelete('cascade');
 
-            $table->unique(['idEti', 'idTar']) ;
+            $table->unique(['idEti', 'idTar']);
         });
     }
 

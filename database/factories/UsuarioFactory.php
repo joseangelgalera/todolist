@@ -9,12 +9,14 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class UsuarioFactory extends Factory
 {
     /**
      * The current password being used by the factory.
      */
-    protected static ?string $password;
+    // protected static ?string $password;
+
+    protected $model = \App\Models\Usuario::class ;
 
     /**
      * Define the model's default state.
@@ -24,21 +26,20 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'nombre'   => fake()->name(),
+            'email'    => fake()->unique()->safeEmail(),
+            'password' => Hash::make('12345678'),
+
         ];
     }
 
     /**
      * Indicate that the model's email address should be unverified.
      */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
-    }
+    // public function unverified(): static
+    // {
+    //     return $this->state(fn (array $attributes) => [
+    //         'email_verified_at' => null,
+    //     ]);
+    // }
 }

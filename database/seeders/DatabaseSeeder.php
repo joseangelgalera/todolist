@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +11,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Creamos el usuario administrador
+        $this->call([UsuarioTableSeeder::class]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Creamos usuarios aleatorios
+        $usuarios = \App\Models\Usuario::factory(9)->create();
+
+        // Creamos tareas aleatorias
+        \App\Models\Tarea::factory(25)->create([
+            'idUsu' => $usuarios->random()->idUsu,
         ]);
+
+        // Creamos etiquetas aleatorias
+        \App\Models\Etiqueta::factory(10)->create();
+
+        // Creamos las relaciones entre tareas y etiquetas
+        $this->call([TareaEtiquetaTableSeeder::class]);
     }
 }
